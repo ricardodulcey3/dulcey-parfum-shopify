@@ -1,0 +1,84 @@
+<section class="hero" id="inicio">
+  <div class="hero__overlay"></div>
+  <div class="hero__glow"></div>
+  <div class="container hero__content">
+    <p class="hero__kicker" data-animate>{{ section.settings.kicker }}</p>
+    <h1 class="hero__title" data-animate>{{ section.settings.title }} <span>{{ section.settings.title_emphasis }}</span></h1>
+    <p class="hero__subtitle" data-animate>{{ section.settings.subtitle }}</p>
+    <div class="hero__cta" data-animate>
+      {%- if section.settings.cta_primary_text != blank -%}
+        <a href="{{ section.settings.cta_primary_link | default: '#catalogo' }}" class="btn btn--gold">{{ section.settings.cta_primary_text }}</a>
+      {%- endif -%}
+      {%- if section.settings.cta_secondary_text != blank -%}
+        <a href="{{ section.settings.cta_secondary_link | default: '#nosotros' }}" class="btn btn--ghost">{{ section.settings.cta_secondary_text }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="hero__stats" data-animate>
+        {%- for block in section.blocks -%}
+          <div class="stat" {{ block.shopify_attributes }}>
+            <span class="stat__number counter" data-count-to="{{ block.settings.number }}" data-prefix="{{ block.settings.prefix }}" data-suffix="{{ block.settings.suffix }}">0</span>
+            <span class="stat__label">{{ block.settings.label }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="hero__bottle" aria-hidden="true">
+    <svg viewBox="0 0 120 220" class="bottle-float">
+      <rect x="45" y="0" width="30" height="18" rx="3" fill="#c9a227"/>
+      <rect x="50" y="18" width="20" height="14" fill="#8a6d1a"/>
+      <path d="M35 32 h50 a8 8 0 0 1 8 8 v150 a10 10 0 0 1 -10 10 h-46 a10 10 0 0 1 -10 -10 v-150 a8 8 0 0 1 8 -8 z" fill="url(#gHero)" stroke="#c9a227" stroke-width="2"/>
+      <defs>
+        <linearGradient id="gHero" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#2a2a2a"/>
+          <stop offset="100%" stop-color="#111"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <a href="#marcas" class="hero__scroll" aria-label="Desplázate hacia abajo">
+    <span></span>
+  </a>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Texto pequeño superior", "default": "100% originales · Edición 2026" },
+    { "type": "text", "id": "title", "label": "Título", "default": "El arte de oler" },
+    { "type": "text", "id": "title_emphasis", "label": "Título - palabra destacada (dorada)", "default": "inolvidable" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "Fragancias importadas y verificadas de las casas más codiciadas del mundo, elegidas para quienes entienden que el aroma también habla." },
+    { "type": "text", "id": "cta_primary_text", "label": "Botón principal - texto", "default": "Ver catálogo" },
+    { "type": "url", "id": "cta_primary_link", "label": "Botón principal - link" },
+    { "type": "text", "id": "cta_secondary_text", "label": "Botón secundario - texto", "default": "Nuestra historia" },
+    { "type": "url", "id": "cta_secondary_link", "label": "Botón secundario - link" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Estadística",
+      "settings": [
+        { "type": "number", "id": "number", "label": "Número", "default": 80 },
+        { "type": "text", "id": "prefix", "label": "Prefijo", "default": "+" },
+        { "type": "text", "id": "suffix", "label": "Sufijo" },
+        { "type": "text", "id": "label", "label": "Etiqueta", "default": "Referencias" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "stat", "settings": { "number": 80, "prefix": "+", "label": "Referencias" } },
+        { "type": "stat", "settings": { "number": 100, "suffix": "%", "label": "Auténticos" } },
+        { "type": "stat", "settings": { "number": 24, "suffix": "h", "label": "Despacho" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

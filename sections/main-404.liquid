@@ -1,0 +1,15 @@
+<div class="error-page">
+  <p class="error-page__code">404</p>
+  <h1 class="error-page__title">{{ section.settings.title }}</h1>
+  <a href="{{ routes.root_url }}" class="btn btn--dark">{{ section.settings.button_text }}</a>
+</div>
+
+{% schema %}
+{
+  "name": "Página 404",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Esta página no existe" },
+    { "type": "text", "id": "button_text", "label": "Texto del botón", "default": "Volver al inicio" }
+  ]
+}
+{% endschema %}

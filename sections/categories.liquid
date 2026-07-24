@@ -1,0 +1,61 @@
+<section class="categories" id="colecciones">
+  <div class="container">
+    <p class="section__kicker" data-animate>{{ section.settings.kicker }}</p>
+    <h2 class="section__title" data-animate>{{ section.settings.title }}</h2>
+    <p class="section__subtitle" data-animate>{{ section.settings.subtitle }}</p>
+
+    <div class="categories__grid">
+      {%- for block in section.blocks -%}
+        <article
+          class="category-card category-card--{{ forloop.index }}"
+          data-animate
+          data-filter-target="{{ block.settings.filter_tag }}"
+          {{ block.shopify_attributes }}
+          {%- if block.settings.image != blank %} style="--bg: url({{ block.settings.image | image_url: width: 800 }})"{% endif -%}
+        >
+          <a href="{{ block.settings.collection.url | default: '#catalogo' }}" style="position:absolute; inset:0; z-index:3;" aria-label="{{ block.settings.title }}"></a>
+          <div class="category-card__inner">
+            <span class="category-card__eyebrow">{{ shop.name }}</span>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.description }}</p>
+            <span class="category-card__cta">Descubrir →</span>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Colecciones",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Texto pequeño superior", "default": "Sección 01" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Tres lenguajes, un mismo carácter." },
+    { "type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "Cada colección guarda una personalidad distinta. Elige el idioma que quieres hablar con tu aroma." }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoría",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Árabes" },
+        { "type": "textarea", "id": "description", "label": "Descripción" },
+        { "type": "text", "id": "filter_tag", "label": "Etiqueta de filtro (debe coincidir con el tag de producto)", "default": "oriental" },
+        { "type": "collection", "id": "collection", "label": "Colección vinculada" },
+        { "type": "image_picker", "id": "image", "label": "Imagen de fondo (opcional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Colecciones",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Árabes", "description": "La opulencia de Oriente, embotellada para coleccionistas.", "filter_tag": "oriental" } },
+        { "type": "category", "settings": { "title": "Diseñador", "description": "Las casas más codiciadas del mundo, en su versión más pura.", "filter_tag": "amaderado" } },
+        { "type": "category", "settings": { "title": "Nicho", "description": "Creaciones raras para quienes buscan lo irrepetible.", "filter_tag": "floral" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

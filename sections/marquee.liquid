@@ -1,0 +1,41 @@
+<section class="marquee" id="marcas">
+  <div class="marquee__track">
+    {%- for i in (1..2) -%}
+      {%- for block in section.blocks -%}
+        <span class="marquee__item" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marcas (marquee)",
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Marca",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Dior" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marcas (marquee)",
+      "blocks": [
+        { "type": "brand", "settings": { "name": "Dior" } },
+        { "type": "brand", "settings": { "name": "Chanel" } },
+        { "type": "brand", "settings": { "name": "Giorgio Armani" } },
+        { "type": "brand", "settings": { "name": "Yves Saint Laurent" } },
+        { "type": "brand", "settings": { "name": "Carolina Herrera" } },
+        { "type": "brand", "settings": { "name": "Lancôme" } },
+        { "type": "brand", "settings": { "name": "Dolce & Gabbana" } },
+        { "type": "brand", "settings": { "name": "Maison Francis Kurkdjian" } },
+        { "type": "brand", "settings": { "name": "Versace" } },
+        { "type": "brand", "settings": { "name": "Paco Rabanne" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

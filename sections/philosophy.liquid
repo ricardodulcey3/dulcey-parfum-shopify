@@ -1,0 +1,21 @@
+<section class="philosophy">
+  <div class="container">
+    <p class="section__kicker" data-animate>{{ section.settings.kicker }}</p>
+    <blockquote class="philosophy__quote" data-animate>
+      &ldquo;{{ section.settings.quote }}&rdquo;
+    </blockquote>
+    <p class="philosophy__author" data-animate>— {{ section.settings.author }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Filosofía",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Texto pequeño superior", "default": "Filosofía" },
+    { "type": "textarea", "id": "quote", "label": "Cita", "default": "Tu fragancia es la primera impresión que permanece: no es un accesorio, es un lenguaje." },
+    { "type": "text", "id": "author", "label": "Autor", "default": "Equipo Dulcey Parfum" }
+  ],
+  "presets": [{ "name": "Filosofía" }]
+}
+{% endschema %}

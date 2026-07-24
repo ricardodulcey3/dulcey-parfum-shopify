@@ -1,0 +1,138 @@
+{%- assign variant = product.selected_or_first_available_variant -%}
+<section class="product-main">
+  <div class="container product-main__inner">
+    <div class="product-gallery" data-animate>
+      <div class="product-gallery__main" id="ProductMainImage">
+        {%- if product.featured_image -%}
+          <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | escape }}" id="ProductMainImageTag">
+        {%- else -%}
+          <svg class="bottle-lg" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:160px;">
+            <rect x="45" y="0" width="30" height="18" rx="3" fill="#c9a227"/>
+            <rect x="50" y="18" width="20" height="14" fill="#8a6d1a"/>
+            <path d="M35 32 h50 a8 8 0 0 1 8 8 v150 a10 10 0 0 1 -10 10 h-46 a10 10 0 0 1 -10 -10 v-150 a8 8 0 0 1 8 -8 z" fill="#1e1e1e" stroke="#c9a227" stroke-width="2"/>
+          </svg>
+        {%- endif -%}
+      </div>
+      {%- if product.images.size > 1 -%}
+        <div class="product-gallery__thumbs">
+          {%- for image in product.images -%}
+            <button type="button" class="product-gallery__thumb{% if forloop.first %} active{% endif %}" data-full="{{ image | image_url: width: 900 }}">
+              <img src="{{ image | image_url: width: 150 }}" alt="{{ image.alt | escape }}">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="product-info" data-animate>
+      <p class="product-info__category">{{ product.type }}</p>
+      <h1 class="product-info__title">{{ product.title }}</h1>
+      <p class="product-info__vendor">{{ product.vendor }}</p>
+
+      <div class="product-info__price-wrap">
+        {%- if variant.compare_at_price > variant.price -%}
+          <span class="product-info__price-old">{{ variant.compare_at_price | money }}</span>
+        {%- endif -%}
+        <span class="product-info__price" id="ProductPrice">{{ variant.price | money }}</span>
+      </div>
+
+      <div class="product-info__desc">{{ product.description }}</div>
+
+      {%- form 'product', product, id: 'ProductForm' -%}
+        <input type="hidden" name="id" value="{{ variant.id }}">
+
+        {%- for option in product.options_with_values -%}
+          <div class="product-form__variant">
+            <label class="product-form__label" for="Option-{{ forloop.index0 }}">{{ option.name }}</label>
+            <select class="product-form__select" id="Option-{{ forloop.index0 }}" data-option-index="{{ forloop.index0 }}">
+              {%- for value in option.values -%}
+                <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endfor -%}
+
+        <div class="product-form__row">
+          <div>
+            <label class="product-form__label" for="Quantity">Cantidad</label>
+            <input type="number" class="product-form__qty" id="Quantity" name="quantity" value="1" min="1">
+          </div>
+        </div>
+
+        <div class="product-form__actions">
+          <button type="submit" class="btn btn--gold" data-add-to-cart {% unless variant.available %}disabled{% endunless %}>
+            {%- if variant.available -%}Agregar al carrito{%- else -%}Agotado{%- endif -%}
+          </button>
+          <a href="https://wa.me/{{ settings.whatsapp_number }}?text={{ 'Hola, tengo una duda sobre ' | append: product.title | url_encode }}" target="_blank" rel="noopener" class="btn btn--whatsapp">
+            {%- render 'icon-whatsapp', size: 18 -%}
+            Preguntar
+          </a>
+        </div>
+      {%- endform -%}
+
+      <div class="product-info__meta">
+        {%- if product.metafields.custom.notas != blank -%}<p><strong>Notas:</strong> {{ product.metafields.custom.notas }}</p>{%- endif -%}
+        <p>Envío en 24h · Producto 100% original</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var productData = {{ product | json }};
+    var form = document.getElementById('ProductForm');
+    if (!form) return;
+
+    var optionSelects = form.querySelectorAll('[data-option-index]');
+    var idInput = form.querySelector('[name="id"]');
+    var priceEl = document.getElementById('ProductPrice');
+    var mainImageTag = document.getElementById('ProductMainImageTag');
+
+    function currentOptions() {
+      return Array.prototype.map.call(optionSelects, function (s) { return s.value; });
+    }
+
+    function findVariant(options) {
+      return productData.variants.find(function (v) {
+        return v.options.every(function (opt, i) { return opt === options[i]; });
+      });
+    }
+
+    function formatMoney(cents) {
+      return '{{ shop.money_format }}'.replace('{{amount}}', (cents / 100).toFixed(2));
+    }
+
+    optionSelects.forEach(function (select) {
+      select.addEventListener('change', function () {
+        var variant = findVariant(currentOptions());
+        if (!variant) return;
+        idInput.value = variant.id;
+        if (priceEl) priceEl.textContent = formatMoney(variant.price);
+        var submitBtn = form.querySelector('[data-add-to-cart]');
+        if (submitBtn) {
+          submitBtn.disabled = !variant.available;
+          submitBtn.textContent = variant.available ? 'Agregar al carrito' : 'Agotado';
+        }
+        if (mainImageTag && variant.featured_image) {
+          mainImageTag.src = variant.featured_image.src;
+        }
+      });
+    });
+
+    document.querySelectorAll('.product-gallery__thumb').forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        document.querySelectorAll('.product-gallery__thumb').forEach(function (t) { t.classList.remove('active'); });
+        thumb.classList.add('active');
+        if (mainImageTag) mainImageTag.src = thumb.dataset.full;
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Producto",
+  "settings": []
+}
+{% endschema %}

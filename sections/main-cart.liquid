@@ -1,0 +1,64 @@
+<section class="cart-main">
+  <div class="container">
+    <h1 class="section__title" style="text-align:left; margin-bottom: 2.5rem;">Tu carrito</h1>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-empty">
+        <h2>Tu carrito está vacío</h2>
+        <p style="margin-bottom: 1.6rem;">Explora el catálogo y encuentra tu próxima fragancia.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--dark">Ver catálogo</a>
+      </div>
+    {%- else -%}
+      {%- form 'cart', cart -%}
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for item in cart.items -%}
+              <tr>
+                <td>
+                  <div class="cart-item__info">
+                    <div class="cart-item__image">
+                      {%- if item.image -%}<img src="{{ item.image | image_url: width: 150 }}" alt="{{ item.title | escape }}">{%- endif -%}
+                    </div>
+                    <div>
+                      <p class="cart-item__title">{{ item.product.title }}</p>
+                      {%- unless item.variant.title contains 'Default' -%}
+                        <p class="cart-item__variant">{{ item.variant.title }}</p>
+                      {%- endunless -%}
+                    </div>
+                  </div>
+                </td>
+                <td>{{ item.original_price | money }}</td>
+                <td>
+                  <input type="number" class="cart-qty" min="0" value="{{ item.quantity }}" data-cart-qty="{{ forloop.index }}">
+                </td>
+                <td>{{ item.original_line_price | money }}</td>
+                <td><a href="{{ item.url_to_remove }}" class="cart-remove">Quitar</a></td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+
+        <div class="cart-summary">
+          <p class="cart-summary__subtotal">Subtotal: {{ cart.total_price | money }}</p>
+          <button type="submit" name="checkout" class="btn btn--gold btn--full" style="max-width: 320px;">Ir a pagar</button>
+        </div>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Carrito",
+  "settings": []
+}
+{% endschema %}

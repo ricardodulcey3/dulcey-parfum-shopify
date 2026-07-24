@@ -1,0 +1,54 @@
+{%- liquid
+  assign category_tags = ''
+  assign badge_text = ''
+  for tag in product.tags
+    if tag contains 'badge:'
+      assign badge_text = tag | remove: 'badge:'
+    else
+      assign category_tags = category_tags | append: tag | append: ','
+    endif
+  endfor
+  assign variant = product.selected_or_first_available_variant
+-%}
+<article class="product-card" data-category="{{ category_tags }}" style="animation-delay: {{ index | default: 0 | times: 0.06 }}s">
+  <a href="{{ product.url }}" class="product-card__image">
+    <div class="product-card__badges">
+      {%- if variant.compare_at_price > variant.price -%}
+        <span class="product-card__badge product-card__badge--discount">
+          -{{ variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round }}%
+        </span>
+      {%- endif -%}
+      {%- if badge_text != '' -%}
+        <span class="product-card__badge">{{ badge_text }}</span>
+      {%- endif -%}
+    </div>
+    {%- if product.featured_image -%}
+      <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy" width="500" height="500">
+    {%- else -%}
+      <svg class="bottle" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="45" y="0" width="30" height="18" rx="3" fill="#c9a227"/>
+        <rect x="50" y="18" width="20" height="14" fill="#8a6d1a"/>
+        <path d="M35 32 h50 a8 8 0 0 1 8 8 v150 a10 10 0 0 1 -10 10 h-46 a10 10 0 0 1 -10 -10 v-150 a8 8 0 0 1 8 -8 z" fill="#1e1e1e" stroke="#c9a227" stroke-width="2"/>
+      </svg>
+    {%- endif -%}
+  </a>
+  <div class="product-card__body">
+    <span class="product-card__category">{{ product.type }}</span>
+    <h3 class="product-card__name"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <span class="product-card__brand">{{ product.vendor }}</span>
+    <p class="product-card__desc">{{ product.description | strip_html | truncate: 130 }}</p>
+    <div class="product-card__footer">
+      <div class="product-card__price-wrap">
+        {%- if variant.compare_at_price > variant.price -%}
+          <span class="product-card__price-old">{{ variant.compare_at_price | money }}</span>
+        {%- endif -%}
+        <span class="product-card__price">{{ variant.price | money }}</span>
+      </div>
+      {%- if product.variants.size == 1 -%}
+        <button type="button" class="product-card__buy" data-quick-add data-variant-id="{{ variant.id }}">Comprar</button>
+      {%- else -%}
+        <a href="{{ product.url }}" class="product-card__buy">Ver opciones</a>
+      {%- endif -%}
+    </div>
+  </div>
+</article>

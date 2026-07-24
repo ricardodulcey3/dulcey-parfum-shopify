@@ -1,0 +1,78 @@
+<section class="about" id="nosotros">
+  <div class="container about__inner">
+    <div class="about__text" data-animate>
+      <p class="section__kicker">{{ section.settings.kicker }}</p>
+      <h2 class="section__title">{{ section.settings.title }}</h2>
+      <p>{{ section.settings.text }}</p>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="about__stats">
+          {%- for block in section.blocks -%}
+            <div class="stat" {{ block.shopify_attributes }}>
+              <span class="stat__number counter" data-count-to="{{ block.settings.number }}" data-prefix="{{ block.settings.prefix }}" data-suffix="{{ block.settings.suffix }}" data-format="{{ block.settings.format }}">0</span>
+              <span class="stat__label">{{ block.settings.label }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="about__visual" data-animate>
+      <div class="bottle-showcase">
+        <svg viewBox="0 0 120 220" class="bottle-lg" aria-hidden="true">
+          <rect x="45" y="0" width="30" height="18" rx="3" fill="#c9a227"/>
+          <rect x="50" y="18" width="20" height="14" fill="#8a6d1a"/>
+          <path d="M35 32 h50 a8 8 0 0 1 8 8 v150 a10 10 0 0 1 -10 10 h-46 a10 10 0 0 1 -10 -10 v-150 a8 8 0 0 1 8 -8 z" fill="url(#g1)" stroke="#c9a227" stroke-width="2"/>
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a2a2a"/>
+              <stop offset="100%" stop-color="#111"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Nosotros",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Texto pequeño superior", "default": "Nuestra historia" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Pasión por el arte de la perfumería" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "En Dulcey Parfum seleccionamos esencias de los mejores proveedores del mundo para crear un catálogo único, duradero y memorable. Cada frasco es una invitación a expresar tu personalidad sin decir una palabra." }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Estadística",
+      "settings": [
+        { "type": "number", "id": "number", "label": "Número", "default": 80 },
+        { "type": "text", "id": "prefix", "label": "Prefijo" },
+        { "type": "text", "id": "suffix", "label": "Sufijo" },
+        {
+          "type": "select",
+          "id": "format",
+          "label": "Formato",
+          "options": [
+            { "value": "", "label": "Normal" },
+            { "value": "k", "label": "Miles (2000 → 2K)" }
+          ],
+          "default": ""
+        },
+        { "type": "text", "id": "label", "label": "Etiqueta", "default": "Fragancias" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nosotros",
+      "blocks": [
+        { "type": "stat", "settings": { "number": 80, "prefix": "+", "label": "Fragancias" } },
+        { "type": "stat", "settings": { "number": 2000, "suffix": "+", "format": "k", "label": "Clientes felices" } },
+        { "type": "stat", "settings": { "number": 100, "suffix": "%", "label": "Originales" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

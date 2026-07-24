@@ -1,0 +1,19 @@
+{
+  "current": {
+    "logo_text_1": "Dulcey",
+    "logo_text_2": "Parfum",
+    "whatsapp_number": "573001234567",
+    "show_whatsapp_float": true,
+    "color_gold": "#c9a227",
+    "color_gold_light": "#e2c464",
+    "color_black": "#0d0d0d",
+    "color_black_soft": "#171717",
+    "color_cream": "#f5f0e6",
+    "social_instagram": "",
+    "social_facebook": "",
+    "social_tiktok": ""
+  },
+  "presets": {
+    "Default": {}
+  }
+}

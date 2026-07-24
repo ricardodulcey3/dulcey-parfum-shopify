@@ -1,0 +1,64 @@
+<section class="catalog" id="catalogo">
+  <div class="container">
+    <p class="section__kicker" data-animate>{{ section.settings.kicker }}</p>
+    <h2 class="section__title" data-animate>{{ section.settings.title }}</h2>
+    <p class="section__subtitle" data-animate>{{ section.settings.subtitle }}</p>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="filters" data-animate data-filters="FeaturedGrid-{{ section.id }}">
+        <button class="filter-btn active" data-filter="todos">Todos</button>
+        {%- for block in section.blocks -%}
+          <button class="filter-btn" data-filter="{{ block.settings.tag }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="product-grid" id="FeaturedGrid-{{ section.id }}">
+      {%- for product in section.settings.collection.products limit: section.settings.product_limit -%}
+        {%- render 'product-card', product: product, index: forloop.index0 -%}
+      {%- else -%}
+        <p class="catalog__empty">Agrega productos a la colección seleccionada para verlos aquí.</p>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.collection != blank -%}
+      <div class="catalog__footer">
+        <a href="{{ section.settings.collection.url }}" class="btn btn--dark">Ver todos los productos</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Catálogo destacado",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Texto pequeño superior", "default": "Sección 02" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Recién llegados" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "Piezas elegidas con criterio para quienes aprecian lo extraordinario." },
+    { "type": "collection", "id": "collection", "label": "Colección a mostrar" },
+    { "type": "range", "id": "product_limit", "label": "Máximo de productos", "min": 4, "max": 24, "step": 4, "default": 8 }
+  ],
+  "blocks": [
+    {
+      "type": "filter",
+      "name": "Filtro",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Etiqueta visible", "default": "Floral" },
+        { "type": "text", "id": "tag", "label": "Tag de producto a filtrar", "default": "floral" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Catálogo destacado",
+      "blocks": [
+        { "type": "filter", "settings": { "label": "Floral", "tag": "floral" } },
+        { "type": "filter", "settings": { "label": "Amaderado", "tag": "amaderado" } },
+        { "type": "filter", "settings": { "label": "Cítrico", "tag": "citrico" } },
+        { "type": "filter", "settings": { "label": "Oriental", "tag": "oriental" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

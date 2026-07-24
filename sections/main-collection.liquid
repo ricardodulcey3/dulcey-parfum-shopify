@@ -1,0 +1,41 @@
+<section class="collection-hero">
+  <div class="container">
+    <h1 class="collection-hero__title">{{ collection.title }}</h1>
+    <p class="collection-hero__count">{{ collection.products_count }} producto{% if collection.products_count != 1 %}s{% endif %}</p>
+  </div>
+</section>
+
+<section class="catalog">
+  <div class="container">
+    {%- if collection.description != blank -%}
+      <p class="section__subtitle">{{ collection.description }}</p>
+    {%- endif -%}
+
+    {%- paginate collection.products by 24 -%}
+      <div class="product-grid" id="CollectionGrid">
+        {%- for product in collection.products -%}
+          {%- render 'product-card', product: product, index: forloop.index0 -%}
+        {%- else -%}
+          <p class="catalog__empty">Todavía no hay productos en esta colección.</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div class="pagination">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">‹</a>{%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}<a href="{{ part.url }}">{{ part.title }}</a>{%- else -%}<span class="active">{{ part.title }}</span>{%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}">›</a>{%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Colección",
+  "settings": []
+}
+{% endschema %}

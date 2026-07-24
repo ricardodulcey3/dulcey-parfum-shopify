@@ -1,0 +1,38 @@
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="{{ routes.root_url }}" class="logo">
+      {{ settings.logo_text_1 }} <span>{{ settings.logo_text_2 }}</span>
+    </a>
+
+    <nav class="nav" id="nav">
+      {%- for link in linklists[section.settings.menu].links -%}
+        <a href="{{ link.url }}" class="nav__link">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="header__actions">
+      <a href="{{ routes.cart_url }}" class="header__cart" aria-label="Carrito">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 3h2l.4 2M7 13h10l3-8H5.4M7 13L5.4 5M7 13l-2 4h13"/><circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none"/></svg>
+        <span class="header__cart-count" id="CartCount" style="display: {% if cart.item_count > 0 %}flex{% else %}none{% endif %};">{{ cart.item_count }}</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Encabezado",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menú de navegación",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

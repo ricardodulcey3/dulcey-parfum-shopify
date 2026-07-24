@@ -1,0 +1,24 @@
+<section class="contact" id="contacto">
+  <div class="container contact__inner">
+    <p class="section__kicker" data-animate>{{ section.settings.kicker }}</p>
+    <h2 class="section__title" data-animate>{{ section.settings.title }}</h2>
+    <p class="contact__text" data-animate>{{ section.settings.text }}</p>
+    <a href="https://wa.me/{{ settings.whatsapp_number }}?text={{ section.settings.whatsapp_message | url_encode }}" target="_blank" rel="noopener" class="btn btn--whatsapp" data-animate>
+      {%- render 'icon-whatsapp', size: 20 -%}
+      Hablar por WhatsApp
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contacto",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Texto pequeño superior", "default": "Concierge olfativo" },
+    { "type": "text", "id": "title", "label": "Título", "default": "¿No sabes cuál elegir? Te asesoramos." },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Cuéntanos qué buscas y te recomendamos tu próxima fragancia, sin costo y sin compromiso." },
+    { "type": "text", "id": "whatsapp_message", "label": "Mensaje prellenado de WhatsApp", "default": "Hola, quiero más información sobre sus perfumes" }
+  ],
+  "presets": [{ "name": "Contacto" }]
+}
+{% endschema %}

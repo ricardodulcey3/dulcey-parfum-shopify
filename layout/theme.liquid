@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page_title }}{% if page_title != shop.name %} | {{ shop.name }}{% endif %}</title>
+{% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+<link rel="canonical" href="{{ canonical_url }}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0d'/%3E%3Cpath d='M13 4h6v5H13z' fill='%23c9a227'/%3E%3Cpath d='M10 10h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2z' fill='%23e2c464'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ content_for_header }}
+
+<style>
+  :root {
+    --gold: {{ settings.color_gold }};
+    --gold-light: {{ settings.color_gold_light }};
+    --black: {{ settings.color_black }};
+    --black-soft: {{ settings.color_black_soft }};
+    --cream: {{ settings.color_cream }};
+  }
+</style>
+</head>
+<body>
+
+{% section 'header' %}
+
+<main id="MainContent">
+  {{ content_for_layout }}
+</main>
+
+{% section 'footer' %}
+
+{%- if settings.show_whatsapp_float -%}
+<a href="https://wa.me/{{ settings.whatsapp_number }}" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+  {% render 'icon-whatsapp', size: 28 %}
+</a>
+{%- endif -%}
+
+{{ 'theme.js' | asset_url | script_tag }}
+</body>
+</html>

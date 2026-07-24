@@ -1,0 +1,48 @@
+<section class="manifesto">
+  <div class="container">
+    <p class="section__kicker" data-animate>{{ section.settings.kicker }}</p>
+    <h2 class="section__title" data-animate>{{ section.settings.title }}</h2>
+
+    <div class="manifesto__grid">
+      {%- for block in section.blocks -%}
+        <div class="manifesto__card" data-animate {{ block.shopify_attributes }}>
+          <span class="manifesto__icon">{{ block.settings.icon }}</span>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Manifiesto",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Texto pequeño superior", "default": "Manifiesto" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Cuatro promesas." }
+  ],
+  "blocks": [
+    {
+      "type": "promise",
+      "name": "Promesa",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Ícono (emoji o símbolo)", "default": "◆" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Autenticidad" },
+        { "type": "textarea", "id": "text", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Manifiesto",
+      "blocks": [
+        { "type": "promise", "settings": { "icon": "◆", "title": "Autenticidad", "text": "Cada frasco es verificado y tiene procedencia clara, sin excepciones." } },
+        { "type": "promise", "settings": { "icon": "✦", "title": "Curaduría", "text": "Solo seleccionamos casas que estén a la altura de tu identidad." } },
+        { "type": "promise", "settings": { "icon": "⏱", "title": "Entrega rápida", "text": "Despachos en 24h y envío gratis en compras superiores a $300.000." } },
+        { "type": "promise", "settings": { "icon": "✉", "title": "Asesoría 24/7", "text": "Te ayudamos a encontrar tu fragancia ideal por WhatsApp, a cualquier hora." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

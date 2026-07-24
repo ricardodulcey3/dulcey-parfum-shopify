@@ -1,0 +1,37 @@
+<section class="collection-hero">
+  <div class="container">
+    <h1 class="collection-hero__title">Resultados de búsqueda</h1>
+    {%- if search.performed -%}
+      <p class="collection-hero__count">{{ search.results_count }} resultado{% if search.results_count != 1 %}s{% endif %} para “{{ search.terms }}”</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<section class="catalog">
+  <div class="container">
+    <form action="{{ routes.search_url }}" method="get" class="newsletter__form" style="max-width: 420px; margin: 0 auto 3rem; border-color: rgba(13,13,13,0.15);">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Buscar productos..." style="color: var(--black);">
+      <input type="hidden" name="type" value="product">
+      <button type="submit" style="color:#000;">Buscar</button>
+    </form>
+
+    {%- if search.performed -%}
+      <div class="product-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {%- render 'product-card', product: item, index: forloop.index0 -%}
+          {%- endif -%}
+        {%- else -%}
+          <p class="catalog__empty">No encontramos resultados. Intenta con otra palabra.</p>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Búsqueda",
+  "settings": []
+}
+{% endschema %}
