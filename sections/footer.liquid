@@ -1,7 +1,10 @@
 <footer class="footer">
   <div class="container footer__grid">
     <div class="footer__brand">
-      <a href="{{ routes.root_url }}" class="logo logo--footer">{{ settings.logo_text_1 }} <span>{{ settings.logo_text_2 }}</span></a>
+      <a href="{{ routes.root_url }}" class="logo logo--footer">
+        {%- render 'logo-mark' -%}
+        {{ settings.logo_text_1 }} <span>{{ settings.logo_text_2 }}</span>
+      </a>
       <p class="footer__desc">{{ section.settings.description }}</p>
       <div class="footer__socials">
         {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" aria-label="Instagram" target="_blank" rel="noopener">IG</a>{%- endif -%}

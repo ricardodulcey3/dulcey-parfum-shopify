@@ -143,6 +143,9 @@ button { font-family: inherit; }
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-serif);
   font-size: clamp(1.15rem, 4vw, 1.6rem);
   font-weight: 700;
@@ -151,6 +154,12 @@ button { font-family: inherit; }
   white-space: nowrap;
 }
 .logo span { color: var(--gold); }
+
+.logo__mark {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
 
 .logo--footer { color: var(--cream); }
 
