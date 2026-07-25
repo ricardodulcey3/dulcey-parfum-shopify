@@ -1,1 +1,95 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Dulcey Parfum",
+    "theme_version": "1.0.0",
+    "theme_author": "Dulcey Parfum",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Marca",
+    "settings": [
+      {
+        "type": "text",
+        "id": "logo_text_1",
+        "label": "Logo - primera palabra",
+        "default": "Dulcey"
+      },
+      {
+        "type": "text",
+        "id": "logo_text_2",
+        "label": "Logo - segunda palabra (dorada)",
+        "default": "Parfum"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "Número de WhatsApp",
+        "info": "Solo dígitos con código de país, ej: 573001234567",
+        "default": "573001234567"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_whatsapp_float",
+        "label": "Mostrar botón flotante de WhatsApp",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Colores",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "Dorado",
+        "default": "#c9a227"
+      },
+      {
+        "type": "color",
+        "id": "color_gold_light",
+        "label": "Dorado claro",
+        "default": "#e2c464"
+      },
+      {
+        "type": "color",
+        "id": "color_black",
+        "label": "Negro",
+        "default": "#0d0d0d"
+      },
+      {
+        "type": "color",
+        "id": "color_black_soft",
+        "label": "Negro suave",
+        "default": "#171717"
+      },
+      {
+        "type": "color",
+        "id": "color_cream",
+        "label": "Crema (fondo)",
+        "default": "#f5f0e6"
+      }
+    ]
+  },
+  {
+    "name": "Redes sociales",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "URL de Instagram"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "URL de Facebook"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "URL de TikTok"
+      }
+    ]
+  }
+]
