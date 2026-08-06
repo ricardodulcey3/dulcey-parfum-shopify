@@ -3,20 +3,20 @@
     "hero": {
       "type": "hero",
       "blocks": {
-        "stat-1": { "type": "stat", "settings": { "number": 80, "prefix": "+", "suffix": "", "label": "Referencias" } },
-        "stat-2": { "type": "stat", "settings": { "number": 100, "prefix": "", "suffix": "%", "label": "Auténticos" } },
+        "stat-1": { "type": "stat", "settings": { "number": 120, "prefix": "+", "suffix": "", "label": "Referencias" } },
+        "stat-2": { "type": "stat", "settings": { "number": 100, "prefix": "", "suffix": "%", "label": "Originales" } },
         "stat-3": { "type": "stat", "settings": { "number": 24, "prefix": "", "suffix": "h", "label": "Despacho" } }
       },
       "block_order": ["stat-1", "stat-2", "stat-3"],
       "settings": {
-        "kicker": "100% originales · Edición 2026",
-        "title": "El arte de oler",
-        "title_emphasis": "inolvidable",
-        "subtitle": "Fragancias importadas y verificadas de las casas más codiciadas del mundo, elegidas para quienes entienden que el aroma también habla.",
-        "cta_primary_text": "Ver catálogo",
+        "kicker": "Perfumería de autor",
+        "title": "Aromas que dejan",
+        "title_emphasis": "huella.",
+        "subtitle": "Fragancias originales de las casas más deseadas. Seleccionadas una a una, verificadas antes de salir y entregadas con la atención que un objeto de deseo merece.",
+        "cta_primary_text": "Comprar ahora",
         "cta_primary_link": "#catalogo",
-        "cta_secondary_text": "Nuestra historia",
-        "cta_secondary_link": "#nosotros"
+        "cta_secondary_text": "Explorar colecciones",
+        "cta_secondary_link": "#colecciones"
       }
     },
     "marquee": {
