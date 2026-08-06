@@ -32,8 +32,8 @@
         "type": "text",
         "id": "whatsapp_number",
         "label": "Número de WhatsApp",
-        "info": "Solo dígitos con código de país, ej: 573001234567",
-        "default": "573001234567"
+        "info": "Solo dígitos con código de país, ej: 393273061419",
+        "default": "393273061419"
       },
       {
         "type": "checkbox",
