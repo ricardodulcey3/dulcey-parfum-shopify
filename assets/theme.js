@@ -209,6 +209,25 @@ function initCartQuantity() {
   });
 }
 
+// ===== Video del hero =====
+// En móvil o con "reducir movimiento" quitamos el elemento por completo:
+// ocultarlo con CSS no impide que el navegador descargue el archivo.
+function initHeroVideo() {
+  const video = document.querySelector(".hero__video");
+  if (!video) return;
+
+  const isSmallScreen = window.matchMedia("(max-width: 768px)").matches;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (isSmallScreen || prefersReducedMotion) {
+    video.remove();
+    return;
+  }
+
+  const playAttempt = video.play();
+  if (playAttempt) playAttempt.catch(() => video.remove());
+}
+
 // ===== Init =====
 document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
@@ -219,4 +238,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initProductForm();
   initCartQuantity();
   onScrollHeader();
+  initHeroVideo();
 });
