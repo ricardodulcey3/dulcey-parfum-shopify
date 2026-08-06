@@ -2,20 +2,24 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --black: #0d0d0d;
-  --black-soft: #171717;
-  --gold: #c9a227;
-  --gold-light: #e2c464;
-  --cream: #f5f0e6;
+  --black: #14120f;
+  --black-soft: #1a1612;
+  --gold: #b08e4c;
+  --gold-light: #e3c88a;
+  --cream: #f9f6ef;
   --gray: #8a8a8a;
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Poppins', sans-serif;
+  --font-serif: 'Bodoni Moda', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Poppins', sans-serif;
   --container-w: 1180px;
   --transition: 0.3s ease;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --announce-h: 40px;
 }
 
 html { scroll-behavior: smooth; }
+
+/* Sin barra de anuncios (sección oculta o vacía) el header no deja hueco. */
+body:not(:has(.announce)) { --announce-h: 0px; }
 
 body {
   font-family: var(--font-sans);
@@ -44,6 +48,8 @@ button { font-family: inherit; }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+  /* Quien pide menos movimiento ve solo el póster fijo. */
+  .hero__video { display: none; }
 }
 
 /* ===== Scroll reveal ===== */
@@ -118,18 +124,64 @@ button { font-family: inherit; }
 
 .btn--full { width: 100%; }
 
+/* ===== Barra de anuncios ===== */
+.announce {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+  background: var(--black);
+  border-bottom: 1px solid rgba(176,142,76,0.2);
+  overflow: hidden;
+  max-height: var(--announce-h);
+  transition: max-height 0.4s var(--ease-out), opacity 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+}
+.announce.is-collapsed {
+  max-height: 0;
+  opacity: 0;
+  border-color: transparent;
+  pointer-events: none;
+}
+
+.announce__track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 35s linear infinite;
+}
+.announce:hover .announce__track { animation-play-state: paused; }
+
+.announce__item {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding-inline: 1.2rem;
+  height: var(--announce-h);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  white-space: nowrap;
+}
+.announce__item::after {
+  content: '◆';
+  font-size: 0.5rem;
+  opacity: 0.6;
+}
+
 /* ===== Header ===== */
 .header {
   position: fixed;
-  top: 0;
+  top: var(--announce-h);
   left: 0;
   width: 100%;
   z-index: 1000;
   background: rgba(13, 13, 13, 0.75);
   backdrop-filter: blur(6px);
-  transition: background var(--transition), box-shadow var(--transition);
+  transition: top 0.4s var(--ease-out), background var(--transition), box-shadow var(--transition), padding var(--transition);
 }
 .header.scrolled {
+  top: 0;
   background: rgba(13, 13, 13, 0.96);
   box-shadow: 0 4px 20px rgba(0,0,0,0.25);
 }
@@ -140,28 +192,48 @@ button { font-family: inherit; }
   justify-content: space-between;
   height: 76px;
   gap: 1.5rem;
+  transition: height var(--transition);
 }
+.header.scrolled .header__inner { height: 64px; }
 
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-serif);
-  font-size: clamp(1.15rem, 4vw, 1.6rem);
-  font-weight: 700;
+  gap: 12px;
   color: var(--cream);
-  letter-spacing: 1px;
   white-space: nowrap;
 }
-.logo span { color: var(--gold); }
 
-.logo__mark {
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
+.logo__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 3.6vw, 1.4rem);
+  font-weight: 500;
+}
+.logo__accent { color: var(--gold); }
+.logo__tagline {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.85;
 }
 
+.logo__mark {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  transition: width var(--transition), height var(--transition);
+}
+.header.scrolled .logo__mark { width: 34px; height: 34px; }
+
 .logo--footer { color: var(--cream); }
+.logo--footer .logo__tagline { display: none; }
 
 .nav {
   display: flex;
@@ -242,19 +314,43 @@ button { font-family: inherit; }
   background: var(--black);
 }
 
+/* Póster de respaldo: se ve mientras carga el video, en móvil y con
+   reduced-motion. La URL la inyecta la sección vía --hero-poster. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--hero-poster, none) center / cover no-repeat;
+  z-index: 0;
+}
+
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.hero__video--mirrored,
+.hero--mirrored::before { transform: scaleX(-1); }
+
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(13,13,13,0.55), rgba(13,13,13,0.9));
+  background:
+    linear-gradient(90deg, rgba(13,13,13,0.92) 0%, rgba(13,13,13,0.6) 45%, rgba(13,13,13,0.25) 100%),
+    linear-gradient(180deg, rgba(13,13,13,0.4), rgba(13,13,13,0.85));
   z-index: 1;
 }
 
 .hero__glow {
   position: absolute;
   inset: -20%;
-  background: radial-gradient(circle at 72% 32%, rgba(201,162,39,0.28) 0%, transparent 55%);
+  background: radial-gradient(circle at 72% 32%, rgba(201,162,39,0.18) 0%, transparent 55%);
   animation: glowShift 12s ease-in-out infinite alternate;
-  z-index: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
 @keyframes glowShift {
@@ -321,8 +417,9 @@ button { font-family: inherit; }
   opacity: 0.9;
   display: none;
 }
+/* Con video de fondo el frasco real reemplaza a la botella SVG. */
 @media (min-width: 1000px) {
-  .hero__bottle { display: block; }
+  .hero:not(:has(.hero__video)) .hero__bottle { display: block; }
 }
 
 .bottle-float {
@@ -777,22 +874,15 @@ button { font-family: inherit; }
 
 .about__visual { display: flex; justify-content: center; }
 
-.bottle-showcase {
-  width: 220px;
-  height: 220px;
-  border: 1px solid rgba(201,162,39,0.4);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: pulseRing 4s ease-in-out infinite;
+.about__photo {
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.8s var(--ease-out);
 }
-@keyframes pulseRing {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(201,162,39,0.15); }
-  50% { box-shadow: 0 0 0 16px rgba(201,162,39,0); }
-}
-
-.bottle-lg { width: 110px; }
+.about__visual:hover .about__photo { transform: scale(1.03); }
 
 /* ===== Philosophy ===== */
 .philosophy {
@@ -829,7 +919,16 @@ button { font-family: inherit; }
 }
 
 /* ===== Footer ===== */
-.footer { background: var(--black); color: var(--cream); padding: 4rem 0 0; }
+.footer { background: var(--black); color: var(--cream); padding: 4.5rem 0 0; }
+
+.footer__massive {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: 0.9;
+  margin-bottom: 2rem;
+}
+
+.footer__rule { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 0; }
 
 .footer__grid {
   display: grid;
@@ -963,7 +1062,7 @@ button { font-family: inherit; }
 }
 
 /* ===== Product page ===== */
-.product-main { padding: 7rem 0 5rem; }
+.product-main { padding: calc(7rem + var(--announce-h)) 0 5rem; }
 
 .product-main__inner {
   display: grid;
@@ -1092,7 +1191,7 @@ button { font-family: inherit; }
 .collection-hero {
   background: var(--black);
   color: var(--cream);
-  padding: 8rem 0 3rem;
+  padding: calc(8rem + var(--announce-h)) 0 3rem;
   text-align: center;
 }
 .collection-hero__title {
@@ -1125,7 +1224,7 @@ button { font-family: inherit; }
 .pagination .active { background: var(--black); color: var(--gold); border-color: var(--black); }
 
 /* ===== Cart page ===== */
-.cart-main { padding: 7rem 0 5rem; }
+.cart-main { padding: calc(7rem + var(--announce-h)) 0 5rem; }
 
 .cart-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
 .cart-table th {
@@ -1186,7 +1285,7 @@ button { font-family: inherit; }
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 8rem 1rem 4rem;
+  padding: calc(8rem + var(--announce-h)) 1rem 4rem;
 }
 .error-page__code {
   font-family: var(--font-serif);
@@ -1211,6 +1310,9 @@ button { font-family: inherit; }
 }
 
 @media (max-width: 768px) {
+  /* En móvil no descargamos el video: basta el póster. */
+  .hero__video { display: none; }
+
   .nav {
     position: fixed;
     top: 0;

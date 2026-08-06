@@ -6,10 +6,11 @@
 <title>{{ page_title }}{% if page_title != shop.name %} | {{ shop.name }}{% endif %}</title>
 {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
 <link rel="canonical" href="{{ canonical_url }}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0d'/%3E%3Cpolygon points='9.3,7 13.1,7 13.1,25 9.3,25' fill='%238a6d1a'/%3E%3Cpolygon points='13.1,7 24,9.3 16,16' fill='%23f0d585'/%3E%3Cpolygon points='24,9.3 27.2,16 16,16' fill='%23e2c464'/%3E%3Cpolygon points='27.2,16 24,22.7 16,16' fill='%23c9a227'/%3E%3Cpolygon points='24,22.7 13.1,25 16,16' fill='%23a8841c'/%3E%3C/svg%3E">
+<link rel="icon" href="{{ 'dulcey-logo-circular-minimo.svg' | asset_url }}" type="image/svg+xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 {{ 'theme.css' | asset_url | stylesheet_tag }}
 {{ content_for_header }}
@@ -26,6 +27,7 @@
 </head>
 <body>
 
+{% section 'announcement-bar' %}
 {% section 'header' %}
 
 <main id="MainContent">

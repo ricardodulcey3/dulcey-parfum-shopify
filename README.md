@@ -1,4 +1,4 @@
-# Dulcey Parfum — Tema Shopify
+# Dulcey Elixir — Tema Shopify
 
 Tema completo de Shopify (Online Store 2.0 / Liquid) con el mismo diseño y animaciones del sitio original, pero conectado a productos, carrito y checkout reales de Shopify.
 

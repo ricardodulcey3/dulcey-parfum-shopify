@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" preserveAspectRatio="xMidYMid slice">
+  <title>Placa de ambiente — Diseñador</title>
+  <defs>
+    <radialGradient id="g" cx="0.5" cy="0.44" r="0.72">
+      <stop offset="0%"   stop-color="#EFE7D6"/>
+      <stop offset="45%"  stop-color="#DED3BC"/>
+      <stop offset="100%" stop-color="#C7BAA1"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#FFFDF8" stop-opacity="0.9"/>
+      <stop offset="36%"  stop-color="#D8CDB6" stop-opacity="0.6"/>
+      <stop offset="70%"  stop-color="#A99A7E" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FFFDF8" stop-opacity="0.75"/>
+    </linearGradient>
+    <linearGradient id="cap" x1="0" y1="0" x2="1" y2="0.6">
+      <stop offset="0%" stop-color="#8E8676"/><stop offset="32%" stop-color="#EFEAE0"/>
+      <stop offset="64%" stop-color="#A69C88"/><stop offset="100%" stop-color="#EFEAE0"/>
+    </linearGradient>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/>
+      <feColorMatrix type="saturate" values="0"/></filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="30"/></filter>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#g)"/>
+  <g opacity="0.45" filter="url(#soft)">
+    <ellipse cx="330" cy="420" rx="200" ry="150" fill="#FFFFFF" opacity="0.35"/>
+    <ellipse cx="520" cy="640" rx="180" ry="120" fill="#C2B49A" opacity="0.3"/>
+  </g>
+  <ellipse cx="400" cy="836" rx="180" ry="22" fill="#EFEAE0" opacity="0.18"/>
+
+  <g transform="translate(400,470) scale(0.86) translate(-300,-375)">
+    <path fill="url(#glass)" stroke="#8E8676" stroke-opacity="0.4" stroke-width="2" d="M 260 90 H 340 V 190 H 315 V 232 C 315 240, 330 244, 348 252
+             C 378 265, 392 292, 392 330 V 590 C 392 622, 372 645, 340 645
+             H 260 C 228 645, 208 622, 208 590 V 330
+             C 208 292, 222 265, 252 252 C 270 244, 285 240, 285 232 V 190 H 260 Z"/>
+    <rect x="256" y="86" width="88" height="108" rx="4" fill="url(#cap)"/>
+    <rect x="248" y="176" width="104" height="16" rx="3" fill="url(#cap)"/>
+    <path d="M 236 320 C 236 288, 250 274, 268 268 L 268 612 C 250 606, 236 592, 236 566 Z"
+          fill="#FFFFFF" opacity="0.26"/>
+  </g>
+  <rect width="800" height="1000" filter="url(#grain)" opacity="0.06"/>
+</svg>

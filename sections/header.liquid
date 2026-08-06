@@ -2,7 +2,12 @@
   <div class="container header__inner">
     <a href="{{ routes.root_url }}" class="logo">
       {%- render 'logo-mark' -%}
-      {{ settings.logo_text_1 }} <span>{{ settings.logo_text_2 }}</span>
+      <span class="logo__text">
+        <span class="logo__line">{{ settings.logo_text_1 }} <span class="logo__accent">{{ settings.logo_text_2 }}</span></span>
+        {%- if settings.logo_tagline != blank -%}
+          <small class="logo__tagline">{{ settings.logo_tagline }}</small>
+        {%- endif -%}
+      </span>
     </a>
 
     <nav class="nav" id="nav">

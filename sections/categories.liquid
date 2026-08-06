@@ -6,12 +6,27 @@
 
     <div class="categories__grid">
       {%- for block in section.blocks -%}
+        {%- liquid
+          if block.settings.image != blank
+            assign card_bg = block.settings.image | image_url: width: 800
+          else
+            assign fallback_index = forloop.index0 | modulo: 3
+            case fallback_index
+              when 0
+                assign card_bg = 'plate-arabes.svg' | asset_url
+              when 1
+                assign card_bg = 'plate-disenador.svg' | asset_url
+              else
+                assign card_bg = 'plate-nicho.svg' | asset_url
+            endcase
+          endif
+        -%}
         <article
           class="category-card category-card--{{ forloop.index }}"
           data-animate
           data-filter-target="{{ block.settings.filter_tag }}"
           {{ block.shopify_attributes }}
-          {%- if block.settings.image != blank %} style="--bg: url({{ block.settings.image | image_url: width: 800 }})"{% endif -%}
+          style="--bg: url({{ card_bg }})"
         >
           <a href="{{ block.settings.collection.url | default: '#catalogo' }}" style="position:absolute; inset:0; z-index:3;" aria-label="{{ block.settings.title }}"></a>
           <div class="category-card__inner">

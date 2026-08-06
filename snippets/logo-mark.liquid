@@ -1,7 +1,12 @@
-<svg class="logo__mark" viewBox="0 0 200 200" aria-hidden="true">
-  <polygon points="58,44 82,44 82,156 58,156" fill="#8a6d1a"/>
-  <polygon points="82,44 150,58 100,100" fill="#f0d585"/>
-  <polygon points="150,58 170,100 100,100" fill="#e2c464"/>
-  <polygon points="170,100 150,142 100,100" fill="#c9a227"/>
-  <polygon points="150,142 82,156 100,100" fill="#a8841c"/>
-</svg>
+{%- comment -%}
+  Sello circular de Dulcey Elixir (monograma "DE" + aro dorado, versión fondo
+  oscuro). Es una imagen, no SVG inline con currentColor, porque el trazo
+  caligráfico usa un degradado dorado fijo que no se controla con `fill`.
+{%- endcomment -%}
+<img
+  class="logo__mark"
+  src="{{ 'dulcey-logo-circular.svg' | asset_url }}"
+  width="40" height="40"
+  alt=""
+  loading="lazy"
+>

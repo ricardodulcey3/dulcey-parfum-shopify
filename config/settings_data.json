@@ -1,14 +1,15 @@
 {
   "current": {
     "logo_text_1": "Dulcey",
-    "logo_text_2": "Parfum",
+    "logo_text_2": "Elixir",
+    "logo_tagline": "Perfumería",
     "whatsapp_number": "573001234567",
     "show_whatsapp_float": true,
-    "color_gold": "#c9a227",
-    "color_gold_light": "#e2c464",
-    "color_black": "#0d0d0d",
-    "color_black_soft": "#171717",
-    "color_cream": "#f5f0e6",
+    "color_gold": "#B08E4C",
+    "color_gold_light": "#E3C88A",
+    "color_black": "#14120F",
+    "color_black_soft": "#1A1612",
+    "color_cream": "#F9F6EF",
     "social_instagram": "",
     "social_facebook": "",
     "social_tiktok": ""

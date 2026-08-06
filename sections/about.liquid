@@ -17,19 +17,11 @@
       {%- endif -%}
     </div>
     <div class="about__visual" data-animate>
-      <div class="bottle-showcase">
-        <svg viewBox="0 0 120 220" class="bottle-lg" aria-hidden="true">
-          <rect x="45" y="0" width="30" height="18" rx="3" fill="#c9a227"/>
-          <rect x="50" y="18" width="20" height="14" fill="#8a6d1a"/>
-          <path d="M35 32 h50 a8 8 0 0 1 8 8 v150 a10 10 0 0 1 -10 10 h-46 a10 10 0 0 1 -10 -10 v-150 a8 8 0 0 1 8 -8 z" fill="url(#g1)" stroke="#c9a227" stroke-width="2"/>
-          <defs>
-            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#2a2a2a"/>
-              <stop offset="100%" stop-color="#111"/>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+      {%- if section.settings.image != blank -%}
+        <img class="about__photo" src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape }}" loading="lazy" width="900" height="1125">
+      {%- else -%}
+        <img class="about__photo" src="{{ 'plate-about.svg' | asset_url }}" alt="" loading="lazy" width="900" height="1125">
+      {%- endif -%}
     </div>
   </div>
 </section>
@@ -40,7 +32,8 @@
   "settings": [
     { "type": "text", "id": "kicker", "label": "Texto pequeño superior", "default": "Nuestra historia" },
     { "type": "text", "id": "title", "label": "Título", "default": "Pasión por el arte de la perfumería" },
-    { "type": "textarea", "id": "text", "label": "Texto", "default": "En Dulcey Parfum seleccionamos esencias de los mejores proveedores del mundo para crear un catálogo único, duradero y memorable. Cada frasco es una invitación a expresar tu personalidad sin decir una palabra." }
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "En Dulcey Elixir seleccionamos esencias de los mejores proveedores del mundo para crear un catálogo único, duradero y memorable. Cada frasco es una invitación a expresar tu personalidad sin decir una palabra." },
+    { "type": "image_picker", "id": "image", "label": "Foto", "info": "Si no subes una, se usa una placa de marca genérica." }
   ],
   "blocks": [
     {

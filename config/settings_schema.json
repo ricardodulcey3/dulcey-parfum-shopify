@@ -1,9 +1,9 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Dulcey Parfum",
-    "theme_version": "1.0.0",
-    "theme_author": "Dulcey Parfum",
+    "theme_name": "Dulcey Elixir",
+    "theme_version": "2.0.0",
+    "theme_author": "Dulcey Elixir Perfumería",
     "theme_documentation_url": "",
     "theme_support_url": ""
   },
@@ -20,7 +20,13 @@
         "type": "text",
         "id": "logo_text_2",
         "label": "Logo - segunda palabra (dorada)",
-        "default": "Parfum"
+        "default": "Elixir"
+      },
+      {
+        "type": "text",
+        "id": "logo_tagline",
+        "label": "Logo - línea pequeña debajo",
+        "default": "Perfumería"
       },
       {
         "type": "text",
@@ -44,31 +50,31 @@
         "type": "color",
         "id": "color_gold",
         "label": "Dorado",
-        "default": "#c9a227"
+        "default": "#B08E4C"
       },
       {
         "type": "color",
         "id": "color_gold_light",
         "label": "Dorado claro",
-        "default": "#e2c464"
+        "default": "#E3C88A"
       },
       {
         "type": "color",
         "id": "color_black",
         "label": "Negro",
-        "default": "#0d0d0d"
+        "default": "#14120F"
       },
       {
         "type": "color",
         "id": "color_black_soft",
         "label": "Negro suave",
-        "default": "#171717"
+        "default": "#1A1612"
       },
       {
         "type": "color",
         "id": "color_cream",
         "label": "Crema (fondo)",
-        "default": "#f5f0e6"
+        "default": "#F9F6EF"
       }
     ]
   },

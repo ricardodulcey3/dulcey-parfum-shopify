@@ -16,11 +16,14 @@ if (navToggle && nav) {
   });
 }
 
-// ===== Header: fondo sólido al hacer scroll =====
+// ===== Header + barra de anuncios: se recogen al hacer scroll =====
 const header = document.getElementById("header");
+const announce = document.querySelector(".announce");
 function onScrollHeader() {
   if (!header) return;
-  header.classList.toggle("scrolled", window.scrollY > 40);
+  const isScrolled = window.scrollY > 40;
+  header.classList.toggle("scrolled", isScrolled);
+  if (announce) announce.classList.toggle("is-collapsed", isScrolled);
 }
 window.addEventListener("scroll", onScrollHeader, { passive: true });
 
@@ -209,6 +212,25 @@ function initCartQuantity() {
   });
 }
 
+// ===== Video del hero =====
+// En móvil o con "reducir movimiento" quitamos el elemento por completo:
+// ocultarlo con CSS no impide que el navegador descargue el archivo.
+function initHeroVideo() {
+  const video = document.querySelector(".hero__video");
+  if (!video) return;
+
+  const isSmallScreen = window.matchMedia("(max-width: 768px)").matches;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (isSmallScreen || prefersReducedMotion) {
+    video.remove();
+    return;
+  }
+
+  const playAttempt = video.play();
+  if (playAttempt) playAttempt.catch(() => video.remove());
+}
+
 // ===== Init =====
 document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
@@ -219,4 +241,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initProductForm();
   initCartQuantity();
   onScrollHeader();
+  initHeroVideo();
 });

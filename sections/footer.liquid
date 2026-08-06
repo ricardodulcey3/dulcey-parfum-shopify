@@ -1,15 +1,29 @@
 <footer class="footer">
+  <div class="container">
+    <p class="footer__massive" data-animate>{{ settings.logo_text_1 }}{{ settings.logo_text_2 }}.</p>
+  </div>
+  <div class="container footer__rule"></div>
+
   <div class="container footer__grid">
     <div class="footer__brand">
       <a href="{{ routes.root_url }}" class="logo logo--footer">
         {%- render 'logo-mark' -%}
-        {{ settings.logo_text_1 }} <span>{{ settings.logo_text_2 }}</span>
+        <span class="logo__text">
+          <span class="logo__line">{{ settings.logo_text_1 }} <span class="logo__accent">{{ settings.logo_text_2 }}</span></span>
+        </span>
       </a>
       <p class="footer__desc">{{ section.settings.description }}</p>
       <div class="footer__socials">
-        {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" aria-label="Instagram" target="_blank" rel="noopener">IG</a>{%- endif -%}
-        {%- if settings.social_facebook != blank -%}<a href="{{ settings.social_facebook }}" aria-label="Facebook" target="_blank" rel="noopener">FB</a>{%- endif -%}
-        {%- if settings.social_tiktok != blank -%}<a href="{{ settings.social_tiktok }}" aria-label="TikTok" target="_blank" rel="noopener">TT</a>{%- endif -%}
+        {%- if settings.social_instagram != blank -%}
+          <a href="{{ settings.social_instagram }}" aria-label="Instagram" target="_blank" rel="noopener">{% render 'icon-instagram' %}</a>
+        {%- endif -%}
+        {%- if settings.social_facebook != blank -%}
+          <a href="{{ settings.social_facebook }}" aria-label="Facebook" target="_blank" rel="noopener">{% render 'icon-facebook' %}</a>
+        {%- endif -%}
+        {%- if settings.social_tiktok != blank -%}
+          <a href="{{ settings.social_tiktok }}" aria-label="TikTok" target="_blank" rel="noopener">{% render 'icon-tiktok' %}</a>
+        {%- endif -%}
+        <a href="https://wa.me/{{ settings.whatsapp_number }}" aria-label="WhatsApp" target="_blank" rel="noopener">{% render 'icon-whatsapp' %}</a>
       </div>
     </div>
 

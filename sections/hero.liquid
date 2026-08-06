@@ -1,4 +1,22 @@
-<section class="hero" id="inicio">
+{%- liquid
+  assign has_poster = false
+  if section.settings.poster != blank
+    assign has_poster = true
+    assign poster_url = section.settings.poster | image_url: width: 1600
+  else
+    assign poster_url = 'plate-hero.svg' | asset_url
+  endif
+-%}
+<section class="hero{% if section.settings.mirror_video %} hero--mirrored{% endif %}" id="inicio" style="--hero-poster: url({{ poster_url }})">
+  {%- if section.settings.video != blank -%}
+    {%- liquid
+      assign video_classes = 'hero__video'
+      if section.settings.mirror_video
+        assign video_classes = video_classes | append: ' hero__video--mirrored'
+      endif
+    -%}
+    {{ section.settings.video | video_tag: image_size: '1600x', autoplay: true, loop: true, muted: true, controls: false, class: video_classes }}
+  {%- endif -%}
   <div class="hero__overlay"></div>
   <div class="hero__glow"></div>
   <div class="container hero__content">
@@ -26,19 +44,21 @@
     {%- endif -%}
   </div>
 
-  <div class="hero__bottle" aria-hidden="true">
-    <svg viewBox="0 0 120 220" class="bottle-float">
-      <rect x="45" y="0" width="30" height="18" rx="3" fill="#c9a227"/>
-      <rect x="50" y="18" width="20" height="14" fill="#8a6d1a"/>
-      <path d="M35 32 h50 a8 8 0 0 1 8 8 v150 a10 10 0 0 1 -10 10 h-46 a10 10 0 0 1 -10 -10 v-150 a8 8 0 0 1 8 -8 z" fill="url(#gHero)" stroke="#c9a227" stroke-width="2"/>
-      <defs>
-        <linearGradient id="gHero" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#2a2a2a"/>
-          <stop offset="100%" stop-color="#111"/>
-        </linearGradient>
-      </defs>
-    </svg>
-  </div>
+  {%- if section.settings.video == blank -%}
+    <div class="hero__bottle" aria-hidden="true">
+      <svg viewBox="0 0 120 220" class="bottle-float">
+        <rect x="45" y="0" width="30" height="18" rx="3" fill="#B08E4C"/>
+        <rect x="50" y="18" width="20" height="14" fill="#8A6A2E"/>
+        <path d="M35 32 h50 a8 8 0 0 1 8 8 v150 a10 10 0 0 1 -10 10 h-46 a10 10 0 0 1 -10 -10 v-150 a8 8 0 0 1 8 -8 z" fill="url(#gHero)" stroke="#B08E4C" stroke-width="2"/>
+        <defs>
+          <linearGradient id="gHero" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#2a2a2a"/>
+            <stop offset="100%" stop-color="#111"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  {%- endif -%}
 
   <a href="#marcas" class="hero__scroll" aria-label="Desplázate hacia abajo">
     <span></span>
@@ -49,13 +69,18 @@
 {
   "name": "Hero",
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Texto pequeño superior", "default": "100% originales · Edición 2026" },
-    { "type": "text", "id": "title", "label": "Título", "default": "El arte de oler" },
-    { "type": "text", "id": "title_emphasis", "label": "Título - palabra destacada (dorada)", "default": "inolvidable" },
-    { "type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "Fragancias importadas y verificadas de las casas más codiciadas del mundo, elegidas para quienes entienden que el aroma también habla." },
-    { "type": "text", "id": "cta_primary_text", "label": "Botón principal - texto", "default": "Ver catálogo" },
+    { "type": "header", "content": "Fondo" },
+    { "type": "video", "id": "video", "label": "Video de fondo", "info": "Se reproduce en bucle y sin sonido. En móvil se muestra solo la imagen de respaldo." },
+    { "type": "image_picker", "id": "poster", "label": "Imagen de respaldo", "info": "Se ve mientras carga el video, en móvil y con 'reducir movimiento' activado. Si no subes nada, se usa una placa de marca genérica." },
+    { "type": "checkbox", "id": "mirror_video", "label": "Espejear el video horizontalmente", "info": "Útil si el frasco queda del mismo lado que el texto.", "default": true },
+    { "type": "header", "content": "Contenido" },
+    { "type": "text", "id": "kicker", "label": "Texto pequeño superior", "default": "Perfumería de autor" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Aromas que dejan" },
+    { "type": "text", "id": "title_emphasis", "label": "Título - palabra destacada (dorada)", "default": "huella." },
+    { "type": "textarea", "id": "subtitle", "label": "Subtítulo", "default": "Fragancias originales de las casas más deseadas. Seleccionadas una a una, verificadas antes de salir y entregadas con la atención que un objeto de deseo merece." },
+    { "type": "text", "id": "cta_primary_text", "label": "Botón principal - texto", "default": "Comprar ahora" },
     { "type": "url", "id": "cta_primary_link", "label": "Botón principal - link" },
-    { "type": "text", "id": "cta_secondary_text", "label": "Botón secundario - texto", "default": "Nuestra historia" },
+    { "type": "text", "id": "cta_secondary_text", "label": "Botón secundario - texto", "default": "Explorar colecciones" },
     { "type": "url", "id": "cta_secondary_link", "label": "Botón secundario - link" }
   ],
   "blocks": [
@@ -74,8 +99,8 @@
     {
       "name": "Hero",
       "blocks": [
-        { "type": "stat", "settings": { "number": 80, "prefix": "+", "label": "Referencias" } },
-        { "type": "stat", "settings": { "number": 100, "suffix": "%", "label": "Auténticos" } },
+        { "type": "stat", "settings": { "number": 120, "prefix": "+", "label": "Referencias" } },
+        { "type": "stat", "settings": { "number": 100, "suffix": "%", "label": "Originales" } },
         { "type": "stat", "settings": { "number": 24, "suffix": "h", "label": "Despacho" } }
       ]
     }

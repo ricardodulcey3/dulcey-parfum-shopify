@@ -1,0 +1,37 @@
+{%- if section.blocks.size > 0 -%}
+<div class="announce">
+  <div class="announce__track">
+    {%- for i in (1..2) -%}
+      {%- for block in section.blocks -%}
+        <span class="announce__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barra de anuncios",
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Mensaje",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "Envío gratis desde $180.000" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de anuncios",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Envío gratis desde $180.000" } },
+        { "type": "message", "settings": { "text": "100% originales" } },
+        { "type": "message", "settings": { "text": "Asesoría por WhatsApp" } },
+        { "type": "message", "settings": { "text": "Despacho en 24 horas" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
