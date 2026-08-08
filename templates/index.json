@@ -165,20 +165,10 @@
             "filter_tag": "oriental",
             "collection": ""
           }
-        },
-        "c2": {
-          "type": "category",
-          "settings": {
-            "title": "Diseñador",
-            "description": "Las casas más codiciadas del mundo, en su versión más pura.",
-            "filter_tag": "amaderado",
-            "collection": ""
-          }
         }
       },
       "block_order": [
-        "c1",
-        "c2"
+        "c1"
       ],
       "settings": {
         "kicker": "Sección 01",
