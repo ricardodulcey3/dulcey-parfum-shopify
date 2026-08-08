@@ -174,21 +174,11 @@
             "filter_tag": "amaderado",
             "collection": ""
           }
-        },
-        "c3": {
-          "type": "category",
-          "settings": {
-            "title": "Nicho",
-            "description": "Creaciones raras para quienes buscan lo irrepetible.",
-            "filter_tag": "floral",
-            "collection": ""
-          }
         }
       },
       "block_order": [
         "c1",
-        "c2",
-        "c3"
+        "c2"
       ],
       "settings": {
         "kicker": "Sección 01",
