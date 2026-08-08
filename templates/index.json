@@ -177,52 +177,6 @@
         "subtitle": "Cada colección guarda una personalidad distinta. Elige el idioma que quieres hablar con tu aroma."
       }
     },
-    "catalog": {
-      "type": "featured-collection",
-      "blocks": {
-        "f1": {
-          "type": "filter",
-          "settings": {
-            "label": "Floral",
-            "tag": "floral"
-          }
-        },
-        "f2": {
-          "type": "filter",
-          "settings": {
-            "label": "Amaderado",
-            "tag": "amaderado"
-          }
-        },
-        "f3": {
-          "type": "filter",
-          "settings": {
-            "label": "Cítrico",
-            "tag": "citrico"
-          }
-        },
-        "f4": {
-          "type": "filter",
-          "settings": {
-            "label": "Oriental",
-            "tag": "oriental"
-          }
-        }
-      },
-      "block_order": [
-        "f1",
-        "f2",
-        "f3",
-        "f4"
-      ],
-      "settings": {
-        "kicker": "Sección 02",
-        "title": "Recién llegados",
-        "subtitle": "Piezas elegidas con criterio para quienes aprecian lo extraordinario.",
-        "collection": "",
-        "product_limit": 8
-      }
-    },
     "about": {
       "type": "about",
       "blocks": {
@@ -270,7 +224,6 @@
     "marquee",
     "manifesto",
     "categories",
-    "catalog",
     "about",
     "philosophy",
     "contact"
