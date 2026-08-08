@@ -12,15 +12,6 @@
     "hero": {
       "type": "hero",
       "blocks": {
-        "stat-1": {
-          "type": "stat",
-          "settings": {
-            "number": 120,
-            "prefix": "+",
-            "suffix": "",
-            "label": "Referencias"
-          }
-        },
         "stat-2": {
           "type": "stat",
           "settings": {
@@ -32,7 +23,6 @@
         }
       },
       "block_order": [
-        "stat-1",
         "stat-2"
       ],
       "settings": {
