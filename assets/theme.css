@@ -823,6 +823,14 @@ button { font-family: inherit; }
 }
 .product-card__buy:hover { background: var(--gold); color: var(--black); }
 
+/* Pedido por WhatsApp: ancho completo dentro del cuerpo de la tarjeta. */
+.product-card__whatsapp {
+  margin-top: 0.9rem;
+  width: 100%;
+  padding: 11px 18px;
+  font-size: 0.85rem;
+}
+
 .catalog__empty {
   text-align: center;
   color: var(--gray);

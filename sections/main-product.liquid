@@ -59,14 +59,16 @@
           </div>
         </div>
 
+        {%- assign sell_mode = settings.sell_mode | default: 'both' -%}
         <div class="product-form__actions">
-          <button type="submit" class="btn btn--gold" data-add-to-cart {% unless variant.available %}disabled{% endunless %}>
-            {%- if variant.available -%}Agregar al carrito{%- else -%}Agotado{%- endif -%}
-          </button>
-          <a href="https://wa.me/{{ settings.whatsapp_number }}?text={{ 'Hola, tengo una duda sobre ' | append: product.title | url_encode }}" target="_blank" rel="noopener" class="btn btn--whatsapp">
-            {%- render 'icon-whatsapp', size: 18 -%}
-            Preguntar
-          </a>
+          {%- unless sell_mode == 'whatsapp' -%}
+            <button type="submit" class="btn btn--gold" data-add-to-cart {% unless variant.available %}disabled{% endunless %}>
+              {%- if variant.available -%}Agregar al carrito{%- else -%}Agotado{%- endif -%}
+            </button>
+          {%- endunless -%}
+          {%- if sell_mode != 'cart' -%}
+            {%- render 'whatsapp-order', product: product, variant: variant -%}
+          {%- endif -%}
         </div>
       {%- endform -%}
 
@@ -103,22 +105,55 @@
       return '{{ shop.money_format }}'.replace('{{amount}}', (cents / 100).toFixed(2));
     }
 
+    // Mantiene el mensaje de WhatsApp en sincronía con la variante y la cantidad
+    // elegidas; si no, el pedido llegaría con la talla o el precio equivocados.
+    var waLink = document.querySelector('[data-whatsapp-order]');
+    var qtyInput = form.querySelector('[name="quantity"]');
+
+    function updateWhatsappLink(variant) {
+      if (!waLink || !variant) return;
+      var qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
+      var d = waLink.dataset;
+
+      var lines = ['Hola, quiero pedir:', ''];
+      lines.push('*' + d.waTitle + '*' + (d.waVendor ? ' — ' + d.waVendor : ''));
+      if (variant.title && variant.title.indexOf('Default') === -1) {
+        lines.push('Presentación: ' + variant.title);
+      }
+      if (qty > 1) lines.push('Cantidad: ' + qty);
+      lines.push('Precio: ' + formatMoney(variant.price));
+      lines.push('', d.waUrl);
+
+      waLink.href = 'https://wa.me/' + d.waPhone + '?text=' + encodeURIComponent(lines.join('\n'));
+    }
+
+    var currentVariant = productData.variants.filter(function (v) {
+      return String(v.id) === String(idInput.value);
+    })[0] || productData.variants[0];
+
+    function onSelectionChange() {
+      // Sin selectores (producto de una sola variante) conservamos la actual,
+      // para que un cambio de cantidad siga actualizando el enlace.
+      var variant = optionSelects.length ? findVariant(currentOptions()) : currentVariant;
+      if (!variant) return;
+      currentVariant = variant;
+      idInput.value = variant.id;
+      if (priceEl) priceEl.textContent = formatMoney(variant.price);
+      var submitBtn = form.querySelector('[data-add-to-cart]');
+      if (submitBtn) {
+        submitBtn.disabled = !variant.available;
+        submitBtn.textContent = variant.available ? 'Agregar al carrito' : 'Agotado';
+      }
+      if (mainImageTag && variant.featured_image) {
+        mainImageTag.src = variant.featured_image.src;
+      }
+      updateWhatsappLink(variant);
+    }
+
     optionSelects.forEach(function (select) {
-      select.addEventListener('change', function () {
-        var variant = findVariant(currentOptions());
-        if (!variant) return;
-        idInput.value = variant.id;
-        if (priceEl) priceEl.textContent = formatMoney(variant.price);
-        var submitBtn = form.querySelector('[data-add-to-cart]');
-        if (submitBtn) {
-          submitBtn.disabled = !variant.available;
-          submitBtn.textContent = variant.available ? 'Agregar al carrito' : 'Agotado';
-        }
-        if (mainImageTag && variant.featured_image) {
-          mainImageTag.src = variant.featured_image.src;
-        }
-      });
+      select.addEventListener('change', onSelectionChange);
     });
+    if (qtyInput) qtyInput.addEventListener('change', onSelectionChange);
 
     document.querySelectorAll('.product-gallery__thumb').forEach(function (thumb) {
       thumb.addEventListener('click', function () {

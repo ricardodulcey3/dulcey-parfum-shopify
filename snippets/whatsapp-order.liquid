@@ -1,0 +1,49 @@
+{%- comment -%}
+  Botón "Pedir por WhatsApp" con mensaje prellenado que identifica el producto.
+
+  Parámetros:
+    product  (obligatorio) — objeto de producto
+    variant  (opcional)    — variante concreta; si falta usa la primera disponible
+    quantity (opcional)    — cantidad a pedir, por defecto 1
+    class    (opcional)    — clases CSS extra para el enlace
+    label    (opcional)    — texto del botón, por defecto "Pedir por WhatsApp"
+
+  El número sale de settings.whatsapp_number (Configuración del tema → Marca).
+{%- endcomment -%}
+
+{%- liquid
+  assign wa_variant = variant | default: product.selected_or_first_available_variant
+  assign wa_qty = quantity | default: 1
+  assign wa_label = label | default: 'Pedir por WhatsApp'
+
+  assign wa_size = ''
+  unless wa_variant.title contains 'Default'
+    assign wa_size = wa_variant.title
+  endunless
+-%}
+
+{%- capture wa_text -%}
+Hola, quiero pedir:
+
+*{{ product.title }}*{% if product.vendor != blank %} — {{ product.vendor }}{% endif %}
+{% if wa_size != blank %}Presentación: {{ wa_size }}
+{% endif %}{% if wa_qty > 1 %}Cantidad: {{ wa_qty }}
+{% endif %}Precio: {{ wa_variant.price | money }}
+
+{{ shop.url }}{{ product.url }}
+{%- endcapture -%}
+
+<a
+  class="btn btn--whatsapp {{ class }}"
+  href="https://wa.me/{{ settings.whatsapp_number }}?text={{ wa_text | strip | url_encode }}"
+  target="_blank"
+  rel="noopener"
+  data-whatsapp-order
+  data-wa-phone="{{ settings.whatsapp_number }}"
+  data-wa-title="{{ product.title | escape }}"
+  data-wa-vendor="{{ product.vendor | escape }}"
+  data-wa-url="{{ shop.url }}{{ product.url }}"
+>
+  {%- render 'icon-whatsapp', size: 18 -%}
+  {{ wa_label }}
+</a>

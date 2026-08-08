@@ -40,6 +40,18 @@
         "id": "show_whatsapp_float",
         "label": "Mostrar botón flotante de WhatsApp",
         "default": true
+      },
+      {
+        "type": "select",
+        "id": "sell_mode",
+        "label": "Cómo se compra",
+        "info": "Define qué botón aparece en cada producto.",
+        "options": [
+          { "value": "cart", "label": "Solo carrito (checkout de Shopify)" },
+          { "value": "whatsapp", "label": "Solo WhatsApp (el pedido llega al chat)" },
+          { "value": "both", "label": "Ambos: carrito y WhatsApp" }
+        ],
+        "default": "both"
       }
     ]
   },

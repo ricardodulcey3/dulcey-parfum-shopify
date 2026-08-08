@@ -37,6 +37,7 @@
     <h3 class="product-card__name"><a href="{{ product.url }}">{{ product.title }}</a></h3>
     <span class="product-card__brand">{{ product.vendor }}</span>
     <p class="product-card__desc">{{ product.description | strip_html | truncate: 130 }}</p>
+    {%- assign sell_mode = settings.sell_mode | default: 'both' -%}
     <div class="product-card__footer">
       <div class="product-card__price-wrap">
         {%- if variant.compare_at_price > variant.price -%}
@@ -44,11 +45,24 @@
         {%- endif -%}
         <span class="product-card__price">{{ variant.price | money }}</span>
       </div>
-      {%- if product.variants.size == 1 -%}
-        <button type="button" class="product-card__buy" data-quick-add data-variant-id="{{ variant.id }}">Comprar</button>
-      {%- else -%}
-        <a href="{{ product.url }}" class="product-card__buy">Ver opciones</a>
-      {%- endif -%}
+      {%- unless sell_mode == 'whatsapp' -%}
+        {%- if product.variants.size == 1 -%}
+          <button type="button" class="product-card__buy" data-quick-add data-variant-id="{{ variant.id }}">Comprar</button>
+        {%- else -%}
+          <a href="{{ product.url }}" class="product-card__buy">Ver opciones</a>
+        {%- endif -%}
+      {%- endunless -%}
     </div>
+
+    {%- if sell_mode != 'cart' -%}
+      {%- if product.variants.size == 1 -%}
+        {%- render 'whatsapp-order', product: product, variant: variant, class: 'product-card__whatsapp' -%}
+      {%- else -%}
+        <a href="{{ product.url }}" class="btn btn--whatsapp product-card__whatsapp">
+          {%- render 'icon-whatsapp', size: 18 -%}
+          Ver opciones
+        </a>
+      {%- endif -%}
+    {%- endif -%}
   </div>
 </article>
