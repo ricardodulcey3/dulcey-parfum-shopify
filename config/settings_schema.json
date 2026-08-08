@@ -1,1 +1,101 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Dulcey Elixir",
+    "theme_version": "2.0.0",
+    "theme_author": "Dulcey Elixir Perfumería",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Marca",
+    "settings": [
+      {
+        "type": "text",
+        "id": "logo_text_1",
+        "label": "Logo - primera palabra",
+        "default": "Dulcey"
+      },
+      {
+        "type": "text",
+        "id": "logo_text_2",
+        "label": "Logo - segunda palabra (dorada)",
+        "default": "Elixir"
+      },
+      {
+        "type": "text",
+        "id": "logo_tagline",
+        "label": "Logo - línea pequeña debajo",
+        "default": "Perfumería"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "Número de WhatsApp",
+        "info": "Solo dígitos con código de país, ej: 393273061419",
+        "default": "393273061419"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_whatsapp_float",
+        "label": "Mostrar botón flotante de WhatsApp",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Colores",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "Dorado",
+        "default": "#B08E4C"
+      },
+      {
+        "type": "color",
+        "id": "color_gold_light",
+        "label": "Dorado claro",
+        "default": "#E3C88A"
+      },
+      {
+        "type": "color",
+        "id": "color_black",
+        "label": "Negro",
+        "default": "#14120F"
+      },
+      {
+        "type": "color",
+        "id": "color_black_soft",
+        "label": "Negro suave",
+        "default": "#1A1612"
+      },
+      {
+        "type": "color",
+        "id": "color_cream",
+        "label": "Crema (fondo)",
+        "default": "#F9F6EF"
+      }
+    ]
+  },
+  {
+    "name": "Redes sociales",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "URL de Instagram"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "URL de Facebook"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "URL de TikTok"
+      }
+    ]
+  }
+]
