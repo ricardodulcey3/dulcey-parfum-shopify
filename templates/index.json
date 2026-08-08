@@ -12,12 +12,42 @@
     "hero": {
       "type": "hero",
       "blocks": {
-        "stat-1": { "type": "stat", "settings": { "number": 120, "prefix": "+", "suffix": "", "label": "Referencias" } },
-        "stat-2": { "type": "stat", "settings": { "number": 100, "prefix": "", "suffix": "%", "label": "Originales" } },
-        "stat-3": { "type": "stat", "settings": { "number": 24, "prefix": "", "suffix": "h", "label": "Despacho" } }
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "number": 120,
+            "prefix": "+",
+            "suffix": "",
+            "label": "Referencias"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "number": 100,
+            "prefix": "",
+            "suffix": "%",
+            "label": "Originales"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "number": 24,
+            "prefix": "",
+            "suffix": "h",
+            "label": "Despacho"
+          }
+        }
       },
-      "block_order": ["stat-1", "stat-2", "stat-3"],
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3"
+      ],
       "settings": {
+        "poster": "shopify://shop_images/Animating_image_2K_202608081048.jpg",
+        "mirror_video": true,
         "kicker": "Perfumería de autor",
         "title": "Aromas que dejan",
         "title_emphasis": "huella.",
@@ -31,29 +61,123 @@
     "marquee": {
       "type": "marquee",
       "blocks": {
-        "b1": { "type": "brand", "settings": { "name": "Dior" } },
-        "b2": { "type": "brand", "settings": { "name": "Chanel" } },
-        "b3": { "type": "brand", "settings": { "name": "Giorgio Armani" } },
-        "b4": { "type": "brand", "settings": { "name": "Yves Saint Laurent" } },
-        "b5": { "type": "brand", "settings": { "name": "Carolina Herrera" } },
-        "b6": { "type": "brand", "settings": { "name": "Lancôme" } },
-        "b7": { "type": "brand", "settings": { "name": "Dolce & Gabbana" } },
-        "b8": { "type": "brand", "settings": { "name": "Maison Francis Kurkdjian" } },
-        "b9": { "type": "brand", "settings": { "name": "Versace" } },
-        "b10": { "type": "brand", "settings": { "name": "Paco Rabanne" } }
+        "b1": {
+          "type": "brand",
+          "settings": {
+            "name": "Dior"
+          }
+        },
+        "b2": {
+          "type": "brand",
+          "settings": {
+            "name": "Chanel"
+          }
+        },
+        "b3": {
+          "type": "brand",
+          "settings": {
+            "name": "Giorgio Armani"
+          }
+        },
+        "b4": {
+          "type": "brand",
+          "settings": {
+            "name": "Yves Saint Laurent"
+          }
+        },
+        "b5": {
+          "type": "brand",
+          "settings": {
+            "name": "Carolina Herrera"
+          }
+        },
+        "b6": {
+          "type": "brand",
+          "settings": {
+            "name": "Lancôme"
+          }
+        },
+        "b7": {
+          "type": "brand",
+          "settings": {
+            "name": "Dolce & Gabbana"
+          }
+        },
+        "b8": {
+          "type": "brand",
+          "settings": {
+            "name": "Maison Francis Kurkdjian"
+          }
+        },
+        "b9": {
+          "type": "brand",
+          "settings": {
+            "name": "Versace"
+          }
+        },
+        "b10": {
+          "type": "brand",
+          "settings": {
+            "name": "Paco Rabanne"
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10"],
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10"
+      ],
       "settings": {}
     },
     "manifesto": {
       "type": "manifesto",
       "blocks": {
-        "p1": { "type": "promise", "settings": { "icon": "◆", "title": "Autenticidad", "text": "Cada frasco es verificado y tiene procedencia clara, sin excepciones." } },
-        "p2": { "type": "promise", "settings": { "icon": "✦", "title": "Curaduría", "text": "Solo seleccionamos casas que estén a la altura de tu identidad." } },
-        "p3": { "type": "promise", "settings": { "icon": "⏱", "title": "Entrega rápida", "text": "Despachos en 24h y envío gratis en compras superiores a $300.000." } },
-        "p4": { "type": "promise", "settings": { "icon": "✉", "title": "Asesoría 24/7", "text": "Te ayudamos a encontrar tu fragancia ideal por WhatsApp, a cualquier hora." } }
+        "p1": {
+          "type": "promise",
+          "settings": {
+            "icon": "◆",
+            "title": "Autenticidad",
+            "text": "Cada frasco es verificado y tiene procedencia clara, sin excepciones."
+          }
+        },
+        "p2": {
+          "type": "promise",
+          "settings": {
+            "icon": "✦",
+            "title": "Curaduría",
+            "text": "Solo seleccionamos casas que estén a la altura de tu identidad."
+          }
+        },
+        "p3": {
+          "type": "promise",
+          "settings": {
+            "icon": "⏱",
+            "title": "Entrega rápida",
+            "text": "Despachos en 24h y envío gratis en compras superiores a $300.000."
+          }
+        },
+        "p4": {
+          "type": "promise",
+          "settings": {
+            "icon": "✉",
+            "title": "Asesoría 24/7",
+            "text": "Te ayudamos a encontrar tu fragancia ideal por WhatsApp, a cualquier hora."
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3", "p4"],
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
       "settings": {
         "kicker": "Manifiesto",
         "title": "Cuatro promesas."
@@ -62,11 +186,39 @@
     "categories": {
       "type": "categories",
       "blocks": {
-        "c1": { "type": "category", "settings": { "title": "Árabes", "description": "La opulencia de Oriente, embotellada para coleccionistas.", "filter_tag": "oriental" } },
-        "c2": { "type": "category", "settings": { "title": "Diseñador", "description": "Las casas más codiciadas del mundo, en su versión más pura.", "filter_tag": "amaderado" } },
-        "c3": { "type": "category", "settings": { "title": "Nicho", "description": "Creaciones raras para quienes buscan lo irrepetible.", "filter_tag": "floral" } }
+        "c1": {
+          "type": "category",
+          "settings": {
+            "title": "Árabes",
+            "description": "La opulencia de Oriente, embotellada para coleccionistas.",
+            "filter_tag": "oriental",
+            "collection": ""
+          }
+        },
+        "c2": {
+          "type": "category",
+          "settings": {
+            "title": "Diseñador",
+            "description": "Las casas más codiciadas del mundo, en su versión más pura.",
+            "filter_tag": "amaderado",
+            "collection": ""
+          }
+        },
+        "c3": {
+          "type": "category",
+          "settings": {
+            "title": "Nicho",
+            "description": "Creaciones raras para quienes buscan lo irrepetible.",
+            "filter_tag": "floral",
+            "collection": ""
+          }
+        }
       },
-      "block_order": ["c1", "c2", "c3"],
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
       "settings": {
         "kicker": "Sección 01",
         "title": "Tres lenguajes, un mismo carácter.",
@@ -76,12 +228,41 @@
     "catalog": {
       "type": "featured-collection",
       "blocks": {
-        "f1": { "type": "filter", "settings": { "label": "Floral", "tag": "floral" } },
-        "f2": { "type": "filter", "settings": { "label": "Amaderado", "tag": "amaderado" } },
-        "f3": { "type": "filter", "settings": { "label": "Cítrico", "tag": "citrico" } },
-        "f4": { "type": "filter", "settings": { "label": "Oriental", "tag": "oriental" } }
+        "f1": {
+          "type": "filter",
+          "settings": {
+            "label": "Floral",
+            "tag": "floral"
+          }
+        },
+        "f2": {
+          "type": "filter",
+          "settings": {
+            "label": "Amaderado",
+            "tag": "amaderado"
+          }
+        },
+        "f3": {
+          "type": "filter",
+          "settings": {
+            "label": "Cítrico",
+            "tag": "citrico"
+          }
+        },
+        "f4": {
+          "type": "filter",
+          "settings": {
+            "label": "Oriental",
+            "tag": "oriental"
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3", "f4"],
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
       "settings": {
         "kicker": "Sección 02",
         "title": "Recién llegados",
@@ -93,11 +274,42 @@
     "about": {
       "type": "about",
       "blocks": {
-        "s1": { "type": "stat", "settings": { "number": 80, "prefix": "+", "label": "Fragancias" } },
-        "s2": { "type": "stat", "settings": { "number": 2000, "suffix": "+", "format": "k", "label": "Clientes felices" } },
-        "s3": { "type": "stat", "settings": { "number": 100, "suffix": "%", "label": "Originales" } }
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "number": 80,
+            "prefix": "+",
+            "suffix": "",
+            "format": "",
+            "label": "Fragancias"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "number": 2000,
+            "prefix": "",
+            "suffix": "+",
+            "format": "k",
+            "label": "Clientes felices"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "number": 100,
+            "prefix": "",
+            "suffix": "%",
+            "format": "",
+            "label": "Originales"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
       "settings": {
         "kicker": "Nuestra historia",
         "title": "Pasión por el arte de la perfumería",
@@ -122,5 +334,14 @@
       }
     }
   },
-  "order": ["hero", "marquee", "manifesto", "categories", "catalog", "about", "philosophy", "contact"]
+  "order": [
+    "hero",
+    "marquee",
+    "manifesto",
+    "categories",
+    "catalog",
+    "about",
+    "philosophy",
+    "contact"
+  ]
 }
