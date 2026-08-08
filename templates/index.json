@@ -127,14 +127,6 @@
             "text": "Cada frasco es verificado y tiene procedencia clara, sin excepciones."
           }
         },
-        "p2": {
-          "type": "promise",
-          "settings": {
-            "icon": "✦",
-            "title": "Curaduría",
-            "text": "Solo seleccionamos casas que estén a la altura de tu identidad."
-          }
-        },
         "p3": {
           "type": "promise",
           "settings": {
@@ -154,7 +146,6 @@
       },
       "block_order": [
         "p1",
-        "p2",
         "p3",
         "p4"
       ],
@@ -293,7 +284,7 @@
       "settings": {
         "kicker": "Nuestra historia",
         "title": "Pasión por el arte de la perfumería",
-        "text": "En Dulcey Elixir seleccionamos esencias de los mejores proveedores del mundo para crear un catálogo único, duradero y memorable. Cada frasco es una invitación a expresar tu personalidad sin decir una palabra."
+        "text": "En Dulcey Elixir apostamos por la casa Lattafa: la perfumería de Dubái que llevó el dátil, el oud y la vainilla a todo el mundo. Cada frasco que sale de aquí es original y verificado, elegido por su carácter. Una invitación a expresar tu personalidad sin decir una palabra."
       }
     },
     "philosophy": {
