@@ -26,15 +26,54 @@
       "announcement-bar": {
         "type": "announcement-bar",
         "blocks": {
-          "m1": { "type": "message", "settings": { "text": "Envío gratis desde $180.000" } },
-          "m2": { "type": "message", "settings": { "text": "100% originales" } },
-          "m3": { "type": "message", "settings": { "text": "Asesoría por WhatsApp" } },
-          "m4": { "type": "message", "settings": { "text": "Despacho en 24 horas" } }
+          "m1": {
+            "type": "message",
+            "settings": {
+              "text": "Envío gratis desde $180.000"
+            }
+          },
+          "m2": {
+            "type": "message",
+            "settings": {
+              "text": "100% originales"
+            }
+          },
+          "m3": {
+            "type": "message",
+            "settings": {
+              "text": "Asesoría por WhatsApp: +393273061419"
+            }
+          },
+          "m4": {
+            "type": "message",
+            "settings": {
+              "text": "Despacho en 24 horas"
+            }
+          }
         },
-        "block_order": ["m1", "m2", "m3", "m4"],
+        "block_order": [
+          "m1",
+          "m2",
+          "m3",
+          "m4"
+        ],
         "settings": {}
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "description": "Perfumería original para quienes entienden que el aroma es la firma invisible de la presencia.",
+          "footer_menu": "footer"
+        }
       }
-    }
+    },
+    "content_for_index": []
   },
   "presets": {
     "Default": {}
