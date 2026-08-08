@@ -245,16 +245,6 @@
     "about": {
       "type": "about",
       "blocks": {
-        "s1": {
-          "type": "stat",
-          "settings": {
-            "number": 80,
-            "prefix": "+",
-            "suffix": "",
-            "format": "",
-            "label": "Fragancias"
-          }
-        },
         "s3": {
           "type": "stat",
           "settings": {
@@ -267,7 +257,6 @@
         }
       },
       "block_order": [
-        "s1",
         "s3"
       ],
       "settings": {
