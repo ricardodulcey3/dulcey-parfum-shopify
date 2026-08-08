@@ -26,6 +26,7 @@
         "stat-2"
       ],
       "settings": {
+        "video": "shopify://files/videos/art of universe botella.mp4",
         "poster": "shopify://shop_images/Animating_image_2K_202608081048.jpg",
         "mirror_video": true,
         "kicker": "Perfumería de autor",
