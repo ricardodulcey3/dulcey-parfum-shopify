@@ -109,6 +109,17 @@
     // elegidas; si no, el pedido llegaría con la talla o el precio equivocados.
     var waLink = document.querySelector('[data-whatsapp-order]');
     var qtyInput = form.querySelector('[name="quantity"]');
+    var waShowEur = {{ settings.whatsapp_show_eur | json }};
+    var waEurRate = {{ settings.eur_exchange_rate | default: 0 }};
+
+    function formatPriceLine(cents) {
+      var line = formatMoney(cents);
+      if (waShowEur && waEurRate > 0) {
+        var eur = Math.round((cents / 100 / waEurRate) * 100) / 100;
+        line += ' (≈ €' + eur.toFixed(2).replace('.', ',') + ')';
+      }
+      return line;
+    }
 
     function updateWhatsappLink(variant) {
       if (!waLink || !variant) return;
@@ -121,7 +132,7 @@
         lines.push('Presentación: ' + variant.title);
       }
       if (qty > 1) lines.push('Cantidad: ' + qty);
-      lines.push('Precio: ' + formatMoney(variant.price));
+      lines.push('Precio: ' + formatPriceLine(variant.price));
       lines.push('', d.waUrl);
 
       waLink.href = 'https://wa.me/' + d.waPhone + '?text=' + encodeURIComponent(lines.join('\n'));

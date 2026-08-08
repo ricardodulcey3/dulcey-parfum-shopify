@@ -52,6 +52,20 @@
           { "value": "both", "label": "Ambos: carrito y WhatsApp" }
         ],
         "default": "both"
+      },
+      {
+        "type": "checkbox",
+        "id": "whatsapp_show_eur",
+        "label": "Mostrar también el precio en euros en el mensaje de WhatsApp",
+        "info": "La tienda sigue funcionando en su moneda normal; esto solo agrega una línea con el equivalente en euros dentro del mensaje.",
+        "default": false
+      },
+      {
+        "type": "number",
+        "id": "eur_exchange_rate",
+        "label": "Pesos colombianos por 1 euro",
+        "info": "Tasa fija, no se actualiza sola: revísala cada cierto tiempo en un conversor (ej. wise.com/currency-converter) y actualízala aquí. Hoy (referencia): ≈ 3.634.",
+        "default": 3634
       }
     ]
   },

@@ -20,6 +20,14 @@
   unless wa_variant.title contains 'Default'
     assign wa_size = wa_variant.title
   endunless
+
+  assign wa_price_line = wa_variant.price | money
+
+  if settings.whatsapp_show_eur and settings.eur_exchange_rate > 0
+    assign wa_eur_amount = wa_variant.price | divided_by: 100.0 | divided_by: settings.eur_exchange_rate | round: 2
+    assign wa_eur_text = wa_eur_amount | append: '' | replace: '.', ','
+    assign wa_price_line = wa_price_line | append: ' (≈ €' | append: wa_eur_text | append: ')'
+  endif
 -%}
 
 {%- capture wa_text -%}
@@ -28,7 +36,7 @@ Hola, quiero pedir:
 *{{ product.title }}*{% if product.vendor != blank %} — {{ product.vendor }}{% endif %}
 {% if wa_size != blank %}Presentación: {{ wa_size }}
 {% endif %}{% if wa_qty > 1 %}Cantidad: {{ wa_qty }}
-{% endif %}Precio: {{ wa_variant.price | money }}
+{% endif %}Precio: {{ wa_price_line }}
 
 {{ shop.url }}{{ product.url }}
 {%- endcapture -%}
